@@ -1,6 +1,27 @@
 # Password Manager API
 
-Backend API for a password manager MVP built with NestJS, Drizzle ORM, PostgreSQL, and Redis.
+Backend API for a password manager MVP built with Node.js + TypeScript using NestJS (on top of Express), Drizzle ORM, PostgreSQL, and Redis.
+
+## Backend Engineering Focus (Node.js / Express.js / NestJS)
+
+This project is intentionally structured to demonstrate practical backend engineering skills across the Node.js ecosystem:
+
+- `Node.js backend fundamentals`
+  - async I/O with PostgreSQL and Redis
+  - environment-based configuration
+  - HTTP server concerns (CORS, cookies, sessions, error handling, graceful shutdown)
+- `Express.js concepts` (applied through NestJS)
+  - request/response lifecycle
+  - middleware-driven auth/session parsing
+  - route-level protection and rate limiting
+  - consistent response/error formatting
+- `NestJS architecture`
+  - modular design (`AuthModule`, `VaultModule`, shared infrastructure modules)
+  - dependency injection for services/providers
+  - controllers/services separation
+  - guards, interceptors, filters, decorators, and pipes
+
+NestJS is the framework used in this repo, and it runs on the Express platform adapter (`@nestjs/platform-express`). That means the code demonstrates both higher-level NestJS patterns and the underlying Express-style HTTP flow they build on.
 
 ## Implemented Features
 
@@ -15,7 +36,10 @@ Backend API for a password manager MVP built with NestJS, Drizzle ORM, PostgreSQ
 
 ## Stack
 
+- Node.js (runtime)
+- TypeScript
 - NestJS
+- Express (via NestJS platform adapter)
 - Drizzle ORM
 - PostgreSQL
 - Redis
@@ -37,6 +61,17 @@ Backend API for a password manager MVP built with NestJS, Drizzle ORM, PostgreSQ
   - global Redis rate-limit guard + decorators
 - `src/common/http`, `src/common/filters`, `src/common/interceptors`
   - response envelope and exception formatting
+
+## Express.js to NestJS Mapping (What This Repo Demonstrates)
+
+- `Express routes/controllers` -> NestJS controllers (`src/modules/auth/auth.controller.ts`, `src/modules/vault/vault.controller.ts`)
+- `Express middleware` -> NestJS middleware (`src/modules/auth/middleware/auth.middleware.ts`)
+- `Express request guards/policies` -> NestJS guards + decorators (`src/modules/auth/guards`, `src/common/rate-limit`)
+- `Express error middleware` -> NestJS exception filters (`src/common/filters/api-exception.filter.ts`)
+- `Express response shaping middleware` -> NestJS interceptors (`src/common/interceptors/api-response.interceptor.ts`)
+- `Manual validation middleware` -> NestJS pipes with Zod (`src/common/pipes/zod-validation.pipe.ts`)
+
+This is useful if you're evaluating the project as an `Express.js backend` as well as a `NestJS backend`: the same HTTP concerns are present, but organized with NestJS modules and dependency injection.
 
 ## Local Setup
 
