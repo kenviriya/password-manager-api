@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: password-manager-postgres
+    environment:
+      POSTGRES_USER: password-manager
+      POSTGRES_PASSWORD: password-manager
+      POSTGRES_DB: password_manager_dev
+    ports:
+      - '5432:5432'
+    volumes:
+      - password_manager_pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: password-manager-redis
+    ports:
+      - '6379:6379'
+
+volumes:
+  password_manager_pgdata:
