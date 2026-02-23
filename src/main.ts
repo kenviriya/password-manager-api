@@ -6,11 +6,7 @@ import { ApiResponseInterceptor } from './common/interceptors/api-response.inter
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  });
-  app.enableCors({
-    origin: 'https://app.kenviriya.space',
+    origin: ['http://localhost:3000', 'https://app.kenviriya.space'],
     credentials: true,
   });
   app.enableShutdownHooks();
