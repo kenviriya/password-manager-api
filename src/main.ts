@@ -9,6 +9,10 @@ async function bootstrap() {
     origin: 'http://localhost:3000',
     credentials: true,
   });
+  app.enableCors({
+    origin: 'https://app.kenviriya.space',
+    credentials: true,
+  });
   app.enableShutdownHooks();
   app.useGlobalFilters(new ApiExceptionFilter());
   app.useGlobalInterceptors(new ApiResponseInterceptor());
