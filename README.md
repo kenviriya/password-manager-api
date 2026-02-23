@@ -147,6 +147,8 @@ npm run start:dev
 
 Default local URL:
 - `http://localhost:3000`
+- Swagger UI: `http://localhost:3000/docs`
+- OpenAPI JSON: `http://localhost:3000/docs-json`
 
 Local frontend note:
 - CORS is currently enabled for `http://localhost:3000` with `credentials: true` (for session cookie auth).
@@ -254,6 +256,36 @@ fetch('/auth/me', { credentials: 'include' });
 ```
 
 ## API Overview
+
+## Try the Deployed API
+
+Base URL:
+- `https://api.kenviriya.space`
+
+Quick test:
+
+```bash
+curl https://api.kenviriya.space/auth/me
+```
+
+Session auth flow with cookies (`curl`):
+
+```bash
+# Register (optional, if you do not have an account yet)
+curl -i \
+  -X POST https://api.kenviriya.space/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"your-email@example.com","password":"your-password"}'
+
+# Login (stores session cookie in cookies.txt)
+curl -i -c cookies.txt \
+  -X POST https://api.kenviriya.space/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"your-email@example.com","password":"your-password"}'
+
+# Authenticated request using stored cookie
+curl -i -b cookies.txt https://api.kenviriya.space/auth/me
+```
 
 ### Auth (`/auth`)
 
