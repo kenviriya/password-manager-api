@@ -19,7 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "seed:user": "node --import tsx ./scripts/seed-user.ts",
     "seed:vault": "node --import tsx ./scripts/seed-vault-items.ts",
-    "seed:dev": "npm run seed:user && npm run seed:vault"
+    "seed:dev": "npm run seed:user && npm run seed:vault",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
